@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>YT Saver</title>
+        <link rel="stylesheet"
+              type="text/css"
+              href="static/utubedownloader/index.css">
+        <link rel="icon"
+              href="static/utubedownloader/favicon.ico"
+              type="image/x-icon">
+    </head>
+    <body>
+        <div class="container">
+            <h2 class="title">Utube Downloader</h2>
+            <p class="subtitle">Save your favorite youtube videos for free!!</p>
+            <form method="post" action="" class="form-container">
+                {% csrf_token %}
+                <!-- for fetching the video -->
+                <input type="text"
+                       class="input-field"
+                       name="given_url"
+                       value="{{ url }}"
+                       placeholder="enter url..">
+                <button type="submit" class="button" name="fetch-vid" value="fetch-vid">Proceed</button>
+                <br>
+                <h3>{{ vidTitle }}</h3>
+                <img src="{{ vidThumbnail }}" class="thumbnail" />
+                <br>
+                <!-- for downloading the video -->
+                {% for x in stream %}
+                    {{ x.resolution }}
+                    <button type="submit"
+                            class="download-button"
+                            name="download-vid"
+                            value="{{ forloop.counter }}">Download Video</button>
+                    |
+                {% endfor %}
+                <br>
+                <br>
+            </form>
+        </div>
+    </body>
+</html>
